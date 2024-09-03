@@ -10,7 +10,7 @@ import {
   Image,
   Tag,
 } from "antd";
-import Highlighter from "react-highlight-words";
+import { Highlighter } from "react-highlight-words";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance, formatPrice } from "../utils";
 import { SectionTitle } from "../components";
