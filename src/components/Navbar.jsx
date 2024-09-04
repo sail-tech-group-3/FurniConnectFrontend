@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../customHooks/useAuth";
 import { useState, useEffect } from "react";
-import { Avatar, Dropdown, Menu, message } from "antd";
+import { Avatar, Dropdown, Menu, message, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import avater from "../assets/avater.png";
 import HamburgerMenu from "./Menu";
@@ -64,10 +64,10 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-slate-900 fixed w-full z-10">
+    <nav className="bg-[#F6F6F6] fixed w-full z-10">
       <div className="align-element gap-10 h-20 flex justify-between items-center relative">
         <Link to="/">
-          <span className="text-white font-bold text-xl lg:text-2xl">
+          <span className="text-[#1B1D21] font-bold text-sm lg:text-2xl">
             FurniConnect
           </span>
         </Link>
@@ -75,14 +75,25 @@ const Navbar = () => {
         <div className="flex gap-5 lg:hidden">
           <NavLink
             to="/cart"
-            className="text-white font-bold text-lg  p-2 px-3 rounded"
+            className="text-[#1B1D21] font-bold  p-2 px-3 rounded text-sm"
           >
             Cart
             <span className="bg-blue-500 absolute top-5 text-white rounded-full px-2 py-1 text-xs">
               {cartCount}
             </span>
           </NavLink>
-          <button onClick={handleIsopen} className="text-white text-xl">
+          {user && (
+            <Dropdown overlay={menu} trigger={["click"]}>
+              <Avatar
+                src={`${user.photo || avater}`}
+                className="w-8 h-8 rounded-full cursor-pointer"
+              />
+            </Dropdown>
+          )}
+          <button
+            onClick={handleIsopen}
+            className="text-black font-bold text-xl"
+          >
             <MenuOutlined />
           </button>
         </div>
@@ -92,32 +103,45 @@ const Navbar = () => {
         <div className="hidden lg:flex gap-8 items-center">
           <NavLink
             to="/products"
-            className="text-white font-bold text-lg  p-2 px-3 rounded"
+            className="text-[#1B1D21] font-bold text-lg  p-2 px-3 rounded"
           >
             Products
           </NavLink>
           <NavLink
             to="/about"
-            className="text-white font-bold text-lg  p-2 px-3 rounded"
+            className="text-[#1B1D21] font-bold text-lg  p-2 px-3 rounded"
           >
             About
           </NavLink>
 
           <NavLink
             to="/cart"
-            className="text-white font-bold text-lg  p-2 px-3 rounded"
+            className="text-[#1B1D21] font-bold text-lg  p-2 px-3 rounded"
           >
             Cart
             <span className="bg-blue-500 absolute top-4 text-white rounded-full px-2 py-1 text-xs">
               {cartCount}
             </span>
           </NavLink>
-          <NavLink
-            to="/checkout"
-            className="text-white font-bold text-lg  p-2 px-3 rounded"
-          >
-            Checkout
-          </NavLink>
+          {user && (
+            <NavLink
+              to="/checkout"
+              className="text-[#1B1D21] font-bold text-lg  p-2 px-3 rounded"
+            >
+              Checkout
+            </NavLink>
+          )}
+          {!user && (
+            <NavLink
+              to="/login"
+              className="text-[#1B1D21] font-bold text-lg  p-2  rounded"
+            >
+              <Button type="primary" className="px-8">
+                {" "}
+                login
+              </Button>
+            </NavLink>
+          )}
 
           {user && (
             <Dropdown overlay={menu} trigger={["hover"]}>

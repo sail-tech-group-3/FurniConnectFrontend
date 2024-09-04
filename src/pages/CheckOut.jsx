@@ -9,7 +9,7 @@ const CheckOut = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const { user } = useAuth();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const publicKey = "pk_test_f060be41f1ddd2d1e5c0430def5a56eb4d5d0ab2";
   const email = user?.email;
@@ -98,7 +98,7 @@ const CheckOut = () => {
             </h2>
             <PaystackButton
               {...componentProps}
-              className="ant-btn ant-btn-primary"
+              className="ant-btn ant-btn-primary bg-blue-500 text-white px-16 py-2 rounded-lg"
             />
           </div>
         </>

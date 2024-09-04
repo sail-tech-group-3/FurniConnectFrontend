@@ -8,7 +8,7 @@ const PieChartComponent = ({ users, products, orders }) => {
     { name: "Orders", value: orders },
   ];
 
-  const COLORS = ["#5B8FF9", "#5AD8A6", "#F6BD16"];
+  const COLORS = ["#FFEBA4", "#BAEDBF", "#E7F2FF"];
 
   return (
     <div className="flex justify-center items-center h-full">

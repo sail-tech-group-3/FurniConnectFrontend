@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const productionUrl = "https://furniconnect-backend.onrender.com/api/v1/";
+const productionUrl = "http://localhost:8000/api/v1/";
+// const productionUrl = "https://furniconnect-backend.onrender.com/api/v1/";
 
 const axiosInstance = axios.create({
   baseURL: productionUrl,

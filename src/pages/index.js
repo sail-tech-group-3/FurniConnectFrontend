@@ -20,6 +20,7 @@ import CreateUser from "./CreateUser";
 import CheckOut from "./CheckOut";
 import PaymentSuccess from "./PaymentSuccess";
 import Orders from "./Orders";
+import UserOrderHistory from "./UserOrderHistory";
 export {
   SingleProduct,
   Login,
@@ -43,4 +44,5 @@ export {
   CheckOut,
   PaymentSuccess,
   Orders,
+  UserOrderHistory,
 };

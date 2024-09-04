@@ -14,11 +14,10 @@ const CreateUser = () => {
 
   useEffect(() => {
     if (user) {
-      // If editing, set form fields to user data
+      console.log("User:", user); // Debugging to check user object
       form.setFieldsValue({
         fullName: user.fullName,
         email: user.email,
-        userName: user.userName,
         phoneNumber: user.phoneNumber,
         role: user.role,
       });
@@ -27,29 +26,24 @@ const CreateUser = () => {
 
   const handleFinish = (values) => {
     if (user) {
-      // If editing, call update function
       const updateValues = {
         ...values,
         id: user._id,
-        password: values.password || undefined, // Only send if defined
-        passwordConfirm: values.passwordConfirm || undefined, // Only send if defined
+        password: values.password || undefined,
+        passwordConfirm: values.passwordConfirm || undefined,
       };
 
       if (values.password || values.passwordConfirm) {
-        // Ensure password fields are present when updating passwords
         if (values.password !== values.passwordConfirm) {
           return form.setFields([
             { name: "passwordConfirm", errors: ["Passwords do not match"] },
           ]);
         }
-        // Update user with password fields
         onUpdateUser(user._id, updateValues);
       } else {
-        // Update user without changing password
         onUpdateUser(user._id, updateValues);
       }
     } else {
-      // If creating, call create function
       onCreateUser(values);
     }
   };
@@ -83,13 +77,17 @@ const CreateUser = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          name="userName"
-          label="Username"
-          rules={[{ required: true, message: "Username is required" }]}
-        >
-          <Input />
-        </Form.Item>
+
+        {!user && (
+          <Form.Item
+            name="userName"
+            label="Username"
+            rules={[{ required: true, message: "Username is required" }]}
+          >
+            <Input />
+          </Form.Item>
+        )}
+
         <Form.Item
           name="phoneNumber"
           label="Phone Number"

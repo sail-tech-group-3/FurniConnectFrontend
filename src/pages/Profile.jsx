@@ -20,6 +20,11 @@ const profileLinks = [
     label: "Create A Product",
     icon: <PlusCircleOutlined />,
   },
+  {
+    path: "orderHistory",
+    label: "Order History",
+    icon: <PlusCircleOutlined />,
+  },
 ];
 
 function Profile() {

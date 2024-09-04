@@ -217,8 +217,8 @@ const CreatedProducts = () => {
       title: "Status",
       key: "status",
       render: (_, record) => (
-        <Tag color={record.price ? "green" : "yellow"}>
-          {record.price ? "Not Verified" : "Verified"}
+        <Tag color={record.price === 0 ? "green" : "yellow"}>
+          {record.price === 0 ? "Not Verified" : "Verified"}
         </Tag>
       ),
     },

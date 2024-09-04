@@ -1,72 +1,56 @@
 /* eslint-disable react/prop-types */
-import { CloseOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { CloseOutlined } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../customHooks/useAuth";
+import { Button } from "antd";
 
 const Menu = ({ onClick }) => {
-  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-
-  const toggleDashboard = () => setIsDashboardOpen(!isDashboardOpen);
-  const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
-
+  const { role, user } = useAuth();
   return (
-    <div className="h-[100svh] absolute top-0 left-0 w-[100vw] bg-slate-900 p-8 text-white">
+    <div className="h-[100svh] absolute top-0 left-0 w-[100vw] bg-white p-8 ">
       <div
-        className="absolute right-8 top-8 text-2xl cursor-pointer"
+        className="absolute right-8 top-8 text-2xl cursor-pointer "
         onClick={onClick}
       >
-        <CloseOutlined className="text-white hover:text-red-500 transition duration-300" />
+        <CloseOutlined className="text-black font-bold" />
       </div>
-      <div className="mt-20 space-y-8">
-        {/* Dashboard Dropdown */}
-        <div className="mb-4">
-          <div
-            onClick={toggleDashboard}
-            className="cursor-pointer font-bold flex items-center justify-between bg-slate-800 p-3 rounded-lg hover:bg-slate-700 transition duration-300"
-          >
-            Dashboard
-            {isDashboardOpen ? (
-              <UpOutlined className="ml-2 text-white" />
-            ) : (
-              <DownOutlined className="ml-2 text-white" />
-            )}
-          </div>
-          {isDashboardOpen && (
-            <div className="pl-6 mt-2 space-y-2">
-              <div className="text-sm bg-slate-800 p-2 rounded-md hover:bg-slate-700 transition duration-300">
-                Create User
-              </div>
-              <div className="text-sm bg-slate-800 p-2 rounded-md hover:bg-slate-700 transition duration-300">
-                Manage Users
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Profile Dropdown */}
-        <div>
-          <div
-            onClick={toggleProfile}
-            className="cursor-pointer font-bold flex items-center justify-between bg-slate-800 p-3 rounded-lg hover:bg-slate-700 transition duration-300"
+      <div className="mt-20 space-y-8 grid">
+        <NavLink
+          to="/products"
+          className="text-[#1B1D21] font-semibold text-lg border-b-2 pb-4"
+          onClick={onClick}
+        >
+          Products
+        </NavLink>
+        <NavLink
+          to="/about"
+          className="text-[#1B1D21] font-semibold text-lg border-b-2 pb-4 "
+          onClick={onClick}
+        >
+          About
+        </NavLink>
+        {user && (
+          <NavLink
+            to="/profile"
+            className="text-[#1B1D21] font-semibold text-lg border-b-2 pb-4 "
+            onClick={onClick}
           >
             Profile
-            {isProfileOpen ? (
-              <UpOutlined className="ml-2 text-white" />
-            ) : (
-              <DownOutlined className="ml-2 text-white" />
-            )}
-          </div>
-          {isProfileOpen && (
-            <div className="pl-6 mt-2 space-y-2">
-              <div className="text-sm bg-slate-800 p-2 rounded-md hover:bg-slate-700 transition duration-300">
-                View Profile
-              </div>
-              <div className="text-sm bg-slate-800 p-2 rounded-md hover:bg-slate-700 transition duration-300">
-                Edit Profile
-              </div>
-            </div>
-          )}
-        </div>
+          </NavLink>
+        )}
+
+        {!user && (
+          <NavLink
+            to="/login"
+            className="text-[#1B1D21] font-bold text-lg  p-2  rounded"
+            onClick={onClick}
+          >
+            <Button type="primary" className="px-8">
+              {" "}
+              login
+            </Button>
+          </NavLink>
+        )}
       </div>
     </div>
   );

@@ -45,6 +45,10 @@ const CreateProduct = () => {
   };
 
   const handleSubmit = async (values) => {
+    if (role !== "admin") {
+      values.price = 0;
+    }
+
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("description", values.description);
@@ -140,20 +144,21 @@ const CreateProduct = () => {
           </Select>
         </Form.Item>
 
-        <Form.Item
-          name="price"
-          label="Product Price"
-          rules={[
-            { required: true, message: "Please enter the product price" },
-          ]}
-        >
-          <Input
-            type="number"
-            placeholder="Enter product price"
-            className="py-3 px-4 border-gray-300 rounded-md"
-            disabled={role !== "admin"}
-          />
-        </Form.Item>
+        {role === "admin" && (
+          <Form.Item
+            name="price"
+            label="Product Price"
+            rules={[
+              { required: true, message: "Please enter the product price" },
+            ]}
+          >
+            <Input
+              type="number"
+              placeholder="Enter product price"
+              className="py-3 px-4 border-gray-300 rounded-md"
+            />
+          </Form.Item>
+        )}
 
         <Form.Item
           name="description"

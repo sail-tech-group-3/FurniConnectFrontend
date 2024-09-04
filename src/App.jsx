@@ -22,6 +22,7 @@ import {
   CheckOut,
   PaymentSuccess,
   Orders,
+  UserOrderHistory,
 } from "./pages";
 
 import { ErrorElement } from "./components";
@@ -103,6 +104,11 @@ const router = createBrowserRouter([
           {
             path: "createdProducts",
             element: <CreatedProducts />,
+            errorElement: <ErrorElement />,
+          },
+          {
+            path: "orderHistory",
+            element: <UserOrderHistory />,
             errorElement: <ErrorElement />,
           },
         ],
