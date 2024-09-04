@@ -6,11 +6,12 @@ import {
   ProductSearch,
   SectionTitle,
 } from "../components";
-
+import { Pagination } from "antd";
 const Products = () => {
   const { products, loading } = useProducts();
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   useEffect(() => {
     if (products) {
       setFilteredProducts(products);
@@ -42,8 +43,19 @@ const Products = () => {
       });
 
       setFilteredProducts(filtered);
+      setCurrentPage(1);
     },
     [products]
+  );
+
+  const handlePaginationChange = (page, pageSize) => {
+    setCurrentPage(page);
+    setPageSize(pageSize);
+  };
+
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
   );
 
   if (loading) {
@@ -55,9 +67,17 @@ const Products = () => {
       <SectionTitle text="Products" />
       <ProductSearch onSearch={handleSearch} />
       <div className="pt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredProducts.map((product) => (
+        {paginatedProducts.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
+      </div>
+      <div className="flex justify-center pt-10">
+        <Pagination
+          current={currentPage}
+          pageSize={pageSize}
+          total={filteredProducts.length}
+          onChange={handlePaginationChange}
+        />
       </div>
     </div>
   );
