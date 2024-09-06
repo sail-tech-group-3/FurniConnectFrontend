@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { PaystackButton } from "react-paystack";
 import { axiosInstance, formatPrice } from "../utils";
 import { useAuth } from "../customHooks/useAuth";
 import { SectionTitle } from "../components";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useNavigate } from "react-router-dom";
 
-const CheckOut = () => {
+const CheckOut = ({ updateCartCount }) => {
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const { user } = useAuth();
@@ -23,6 +24,7 @@ const CheckOut = () => {
     );
     setTotalAmount(total);
   }, []);
+  console.log(cartItems);
   const handlePaymentSuccess = async (response) => {
     console.log("Payment successful", response);
 
@@ -30,6 +32,7 @@ const CheckOut = () => {
       items: cartItems.map((item) => ({
         product: item._id,
         quantity: item.quantity,
+        name: item.name,
         price: item.price,
       })),
       totalAmount,
@@ -46,7 +49,9 @@ const CheckOut = () => {
 
       localStorage.removeItem("cartItems");
       setCartItems([]);
+
       navigate("/payment/success");
+      updateCartCount();
     } catch (error) {
       console.error("Error saving order:", error);
     }
@@ -98,7 +103,7 @@ const CheckOut = () => {
             </h2>
             <PaystackButton
               {...componentProps}
-              className="ant-btn ant-btn-primary bg-blue-500 text-white px-16 py-2 rounded-lg"
+              className="ant-btn ant-btn-primary bg-[#2E3192] text-white px-16 py-2 rounded-lg"
             />
           </div>
         </>

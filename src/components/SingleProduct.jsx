@@ -37,7 +37,11 @@ const Product = ({ product, quantity, onQuantityChange, onAddToCart }) => {
             {generateAmountOptions(10)}
           </select>
         </div>
-        <Button type="primary" className="w-full mt-8" onClick={onAddToCart}>
+        <Button
+          type="primary"
+          className="w-full mt-8 bg-[#2E3192]"
+          onClick={onAddToCart}
+        >
           Add to Cart
         </Button>
       </div>

@@ -26,7 +26,6 @@ const CreatedProducts = () => {
   const searchInput = useRef(null);
   const navigate = useNavigate();
 
-  // Fetch products with pagination
   const fetchProducts = async (page = 1) => {
     setLoading(true);
     try {
@@ -37,7 +36,7 @@ const CreatedProducts = () => {
       setTotal(response.data.data.total);
     } catch (error) {
       message.error("Failed to fetch products. Please try again.");
-      console.error("Fetch products error:", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -47,7 +46,6 @@ const CreatedProducts = () => {
     fetchProducts();
   }, []);
 
-  // Handle page change for pagination
   const handlePageChange = (page) => {
     setCurrentPage(page);
     fetchProducts(page);
@@ -153,7 +151,7 @@ const CreatedProducts = () => {
       fetchProducts(currentPage);
     } catch (error) {
       message.error("Failed to delete product. Please try again.");
-      console.error("Delete error:", error);
+      console.error(error);
     }
   };
 
@@ -217,7 +215,7 @@ const CreatedProducts = () => {
       title: "Status",
       key: "status",
       render: (_, record) => (
-        <Tag color={record.price === 0 ? "green" : "yellow"}>
+        <Tag color={record.price === 0 ? "yellow" : "green"}>
           {record.price === 0 ? "Not Verified" : "Verified"}
         </Tag>
       ),

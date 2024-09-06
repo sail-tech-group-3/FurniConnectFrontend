@@ -17,7 +17,7 @@ const UserOrderHistory = () => {
   const { orders, loading, total, pageSize, fetchOrders } = useUserOrderHistory(
     user?._id
   );
-  console.log(orders, user);
+  // console.log("Order created", JSON.stringify(orders, null, 2));
   useEffect(() => {
     if (user) {
       fetchOrders(currentPage);
@@ -131,9 +131,9 @@ const UserOrderHistory = () => {
     },
     {
       title: "Date",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      render: (date) => new Date(date).toLocaleDateString(),
+      dataIndex: "orderDate", // Ensure this matches the field in the schema
+      key: "orderDate",
+      render: (date) => (date ? new Date(date).toLocaleDateString() : "N/A"),
     },
     {
       title: "Total Amount",
@@ -152,7 +152,7 @@ const UserOrderHistory = () => {
     key: index,
     customerName: order.customerName,
     customerEmail: order.customerEmail,
-    createdAt: order.createdAt,
+    orderDate: order.orderDate,
     totalAmount: order.totalAmount,
   }));
 

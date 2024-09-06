@@ -14,7 +14,6 @@ const CreateUser = () => {
 
   useEffect(() => {
     if (user) {
-      console.log("User:", user); // Debugging to check user object
       form.setFieldsValue({
         fullName: user.fullName,
         email: user.email,
@@ -49,7 +48,7 @@ const CreateUser = () => {
   };
 
   return (
-    <Card className="max-w-[40rem] w-[90%] mx-auto">
+    <Card className="max-w-[40rem] w-[95%] mx-auto">
       <h1 className="font-bold text-center text-2xl">
         {user ? "Edit User" : "Create User"}
       </h1>
@@ -118,7 +117,13 @@ const CreateUser = () => {
             <Form.Item
               name="password"
               label="Password"
-              rules={[{ required: true, message: "Password is required" }]}
+              rules={[
+                { required: true, message: "Password is required" },
+                {
+                  min: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+              ]}
             >
               <Input.Password />
             </Form.Item>
@@ -146,7 +151,13 @@ const CreateUser = () => {
             </Form.Item>
           </>
         )}
-        <Button type="primary" loading={loading} htmlType="submit" block>
+        <Button
+          type="primary"
+          loading={loading}
+          htmlType="submit"
+          block
+          className="bg-[#2E3192]"
+        >
           {user ? "Update User" : "Create User"}
         </Button>
       </Form>

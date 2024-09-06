@@ -35,10 +35,9 @@ const UpdateProfile = () => {
       const { user } = response.data.data;
       setImageUrl(`${user.photo}`);
       message.success("Upload successful!");
-      console.log("File uploaded:", response.data);
     } catch (error) {
       message.error("Upload failed.");
-      console.error("Upload error:", error);
+      console.error(error);
     }
   };
 
@@ -73,7 +72,7 @@ const UpdateProfile = () => {
         >
           <Button
             icon={<UploadOutlined />}
-            className="w-full bg-blue-500 text-white hover:bg-blue-600"
+            className="w-full bg-[#2E3192] text-white "
           >
             Upload Profile Picture
           </Button>
@@ -121,7 +120,7 @@ const UpdateProfile = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className="w-full bg-blue-500 text-white hover:bg-blue-600"
+            className="w-full bg-[#2E3192] text-white "
           >
             Update Profile
           </Button>

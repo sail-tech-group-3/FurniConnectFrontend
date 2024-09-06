@@ -28,15 +28,15 @@ function ProductList() {
         return (
           <div
             key={product._id}
-            className="w-full shadow-xl hover:shadow-2xl transition duration-300"
+            className="w-full overflow-hidden cursor-pointer rounded-lg shadow-xl hover:shadow-2xl transition duration-300"
           >
             <img
               src={images[0]}
               alt={name}
-              className="w-full h-48 object-cover"
+              className="w-full h-48 object-cover "
             />
             <div className="p-4">
-              <h3 className="text-xl font-semibold">{name}</h3>
+              <h3 className="text-xl font-semibold mb-4">{name}</h3>
               <p className="text-lg text-gray-700">{formattedPrice}</p>
             </div>
           </div>

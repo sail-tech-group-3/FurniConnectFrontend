@@ -17,13 +17,12 @@ const ChangePassword = () => {
       });
 
       message.success("Password changed successfully!");
-      console.log("Password change response:", response.data);
+      console.log(response.data);
 
-      // Redirect to profile page or another page after successful password change
       navigate("/");
     } catch (error) {
       message.error("Failed to change password.");
-      console.error("Password change error:", error);
+      console.error(error);
       setLoading(false);
     }
   };
@@ -71,7 +70,7 @@ const ChangePassword = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className="w-full bg-blue-500 text-white hover:bg-blue-600"
+            className="w-full bg-[#2E3192] text-white"
             loading={loading}
           >
             Change Password

@@ -35,7 +35,7 @@ const Dashboard = () => {
   return (
     <>
       <Sidebar links={dashboardLinks} />
-      <div className="px-4 py-14 lg:ml-[20rem] lg:px-10">
+      <div className="px-4 py-20 lg:ml-[20rem] lg:px-10">
         <Outlet />
       </div>
     </>

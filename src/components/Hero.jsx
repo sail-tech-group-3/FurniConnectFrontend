@@ -27,7 +27,7 @@ function Hero() {
         </p>
         <div className="mt-10">
           <Link to="/products">
-            <Button className="bg-blue-500 text-white hover:bg-blue-600">
+            <Button className="bg-[#2E3192] text-white hover:bg-blue-600">
               Explore Our Products
             </Button>
           </Link>

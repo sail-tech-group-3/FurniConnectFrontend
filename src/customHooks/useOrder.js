@@ -14,7 +14,7 @@ const useOrder = () => {
       const response = await axiosInstance.get(`/orders`, {
         params: { page, limit: pageSize },
       });
-      setOrders(response.data.data);
+      setOrders(response.data.data.orders);
       setTotal(response.data.results);
       console.log(response.data);
     } catch (error) {

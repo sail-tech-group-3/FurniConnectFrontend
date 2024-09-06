@@ -39,7 +39,11 @@ const ProductSearch = ({ onSearch }) => {
         <Option value="ascend">A-Z</Option>
         <Option value="descend">Z-A</Option>
       </Select>
-      <Button type="primary" onClick={handleSearch} className="h-12">
+      <Button
+        type="primary"
+        onClick={handleSearch}
+        className="h-12 bg-[#2E3192]"
+      >
         Search
       </Button>
     </div>

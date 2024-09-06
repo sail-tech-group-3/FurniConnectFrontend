@@ -11,7 +11,7 @@ const Products = () => {
   const { products, loading } = useProducts();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(8);
   useEffect(() => {
     if (products) {
       setFilteredProducts(products);

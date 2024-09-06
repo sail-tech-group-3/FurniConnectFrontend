@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import { Form, Input, Button, Upload, message, Select } from "antd";
+import { Form, Input, Button, Upload, message, Select, Checkbox } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../utils";
@@ -25,6 +25,7 @@ const CreateProduct = () => {
         description: product.description,
         productType: product.productType,
         price: product.price,
+        isFeatured: product.isFeatured,
       });
 
       setFileList(
@@ -54,6 +55,7 @@ const CreateProduct = () => {
     formData.append("description", values.description);
     formData.append("productType", values.productType);
     formData.append("price", values.price);
+    formData.append("isFeatured", values.isFeatured || false);
 
     fileList.forEach((file) => {
       if (file.originFileObj) {
@@ -100,7 +102,7 @@ const CreateProduct = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-12 p-8 bg-white shadow-lg rounded-lg ">
+    <div className="max-w-2xl mx-auto mt-12 p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
         {location.state?.product ? "Edit Product" : "Create Product"}
       </h2>
@@ -145,19 +147,25 @@ const CreateProduct = () => {
         </Form.Item>
 
         {role === "admin" && (
-          <Form.Item
-            name="price"
-            label="Product Price"
-            rules={[
-              { required: true, message: "Please enter the product price" },
-            ]}
-          >
-            <Input
-              type="number"
-              placeholder="Enter product price"
-              className="py-3 px-4 border-gray-300 rounded-md"
-            />
-          </Form.Item>
+          <>
+            <Form.Item
+              name="price"
+              label="Product Price"
+              rules={[
+                { required: true, message: "Please enter the product price" },
+              ]}
+            >
+              <Input
+                type="number"
+                placeholder="Enter product price"
+                className="py-3 px-4 border-gray-300 rounded-md"
+              />
+            </Form.Item>
+
+            <Form.Item name="isFeatured" valuePropName="checked">
+              <Checkbox>Feature this product</Checkbox>
+            </Form.Item>
+          </>
         )}
 
         <Form.Item
@@ -188,7 +196,12 @@ const CreateProduct = () => {
             beforeUpload={() => false}
             showUploadList={{ showPreviewIcon: true, showRemoveIcon: true }}
           >
-            <Button icon={<UploadOutlined />}>Upload</Button>
+            <Button
+              icon={<UploadOutlined />}
+              className="bg-[#2E3192] text-white"
+            >
+              Upload
+            </Button>
           </Upload>
         </Form.Item>
 
@@ -197,7 +210,7 @@ const CreateProduct = () => {
             type="primary"
             htmlType="submit"
             loading={uploading}
-            className="w-full"
+            className="w-full bg-[#2E3192]"
           >
             {location.state?.product ? "Update Product" : "Create Product"}
           </Button>

@@ -1,29 +1,18 @@
+/* eslint-disable react/prop-types */
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../customHooks/useAuth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Avatar, Dropdown, Menu, message, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import avater from "../assets/avater.png";
 import HamburgerMenu from "./Menu";
 
-const Navbar = () => {
-  const { role, user } = useAuth();
-  const [cartCount, setCartCount] = useState(0);
+const Navbar = ({ role, user, cartCount }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleIsopen = () => {
     setIsOpen((prev) => !prev);
   };
-
-  useEffect(() => {
-    const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const totalItems = storedCartItems.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
-    setCartCount(totalItems);
-  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("***");
@@ -72,13 +61,13 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <div className="flex gap-5 lg:hidden">
+        <div className="flex item-center gap-5 lg:hidden">
           <NavLink
             to="/cart"
             className="text-[#1B1D21] font-bold  p-2 px-3 rounded text-sm"
           >
             Cart
-            <span className="bg-blue-500 absolute top-5 text-white rounded-full px-2 py-1 text-xs">
+            <span className="bg-[#2E3192] absolute top-5 text-white rounded-full px-2 py-1 text-xs">
               {cartCount}
             </span>
           </NavLink>
@@ -98,7 +87,9 @@ const Navbar = () => {
           </button>
         </div>
 
-        {isOpen && <HamburgerMenu onClick={handleIsopen} />}
+        {isOpen && (
+          <HamburgerMenu onClick={handleIsopen} role={role} user={user} />
+        )}
 
         <div className="hidden lg:flex gap-8 items-center">
           <NavLink
@@ -119,7 +110,7 @@ const Navbar = () => {
             className="text-[#1B1D21] font-bold text-lg  p-2 px-3 rounded"
           >
             Cart
-            <span className="bg-blue-500 absolute top-4 text-white rounded-full px-2 py-1 text-xs">
+            <span className="bg-[#2E3192] absolute top-4 text-white rounded-full px-2 py-1 text-xs">
               {cartCount}
             </span>
           </NavLink>
@@ -136,9 +127,9 @@ const Navbar = () => {
               to="/login"
               className="text-[#1B1D21] font-bold text-lg  p-2  rounded"
             >
-              <Button type="primary" className="px-8">
+              <Button type="primary" className="px-8 bg-[#2E3192]">
                 {" "}
-                login
+                Login
               </Button>
             </NavLink>
           )}

@@ -1,26 +1,25 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { axiosInstance } from "../utils";
 import { useParams } from "react-router-dom";
-import Product from "../components/SingleProduct";
+import { axiosInstance } from "../utils";
 import { message } from "antd";
 import { SectionTitle, Loading } from "../components";
+import Product from "../components/SingleProduct";
 
-function SingleProduct() {
+const SingleProduct = ({ updateCartCount }) => {
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(1); // State for selected quantity
+  const [quantity, setQuantity] = useState(1);
   const { _id } = useParams();
 
   useEffect(() => {
-    async function fetchProduct() {
+    const fetchProduct = async () => {
       try {
         const res = await axiosInstance.get(`products/${_id}`);
-        console.log(res.data.data);
         setProduct(res.data.data.product);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
-    }
-
+    };
     fetchProduct();
   }, [_id]);
 
@@ -46,6 +45,9 @@ function SingleProduct() {
 
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     message.success("Product added to cart!");
+
+    // Update cart count in App
+    updateCartCount();
   };
 
   return (
@@ -68,12 +70,12 @@ function SingleProduct() {
             className="w-full lg:w-[15rem] h-[20rem] bg-slate-100 p-2 shadow-2xl"
             key={index}
           >
-            <img src={image} alt="images" className="w-full h-full " />
+            <img src={image} alt="images" className="w-full h-full" />
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default SingleProduct;
