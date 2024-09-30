@@ -28,15 +28,13 @@ const ManageProducts = () => {
   const searchInput = useRef(null);
   const navigate = useNavigate();
 
-  // Fetch products with pagination
   const loadProducts = async (page = 1) => {
     setLoading(true);
     try {
       await fetchProducts(page, pageSize);
-      setTotal(products.length); // Update total with the length of products
-    } catch (error) {
+      setTotal(products.length);
+    } catch {
       message.error("Failed to fetch products. Please try again.");
-      console.error("Fetch products error:", error);
     } finally {
       setLoading(false);
     }
@@ -46,7 +44,6 @@ const ManageProducts = () => {
     loadProducts();
   }, []);
 
-  // Handle page change for pagination
   const handlePageChange = (page) => {
     setCurrentPage(page);
     loadProducts(page);
@@ -148,11 +145,7 @@ const ManageProducts = () => {
       } else {
         message.error("Failed to delete product");
       }
-    } catch (error) {
-      console.error(
-        "Failed to delete product:",
-        error.response || error.message
-      );
+    } catch {
       message.error("Failed to delete product");
     }
   };

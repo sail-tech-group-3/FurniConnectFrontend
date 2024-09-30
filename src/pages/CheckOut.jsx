@@ -24,10 +24,7 @@ const CheckOut = ({ updateCartCount }) => {
     );
     setTotalAmount(total);
   }, []);
-  console.log(cartItems);
-  const handlePaymentSuccess = async (response) => {
-    console.log("Payment successful", response);
-
+  const handlePaymentSuccess = async () => {
     const orderData = {
       items: cartItems.map((item) => ({
         product: item._id,
@@ -53,7 +50,7 @@ const CheckOut = ({ updateCartCount }) => {
       navigate("/payment/success");
       updateCartCount();
     } catch (error) {
-      console.error("Error saving order:", error);
+      console.error("error saving order", error);
     }
   };
 
@@ -64,7 +61,7 @@ const CheckOut = ({ updateCartCount }) => {
     publicKey,
     text: "Pay Now",
     onSuccess: handlePaymentSuccess,
-    onClose: () => console.log("Payment closed"),
+    onClose: () => console.log("payment closed"),
   };
 
   return (

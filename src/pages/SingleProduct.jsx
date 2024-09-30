@@ -17,7 +17,7 @@ const SingleProduct = ({ updateCartCount }) => {
         const res = await axiosInstance.get(`products/${_id}`);
         setProduct(res.data.data.product);
       } catch (error) {
-        console.error("Error fetching product:", error);
+        console.error("Error fetching product", error);
       }
     };
     fetchProduct();
@@ -46,7 +46,6 @@ const SingleProduct = ({ updateCartCount }) => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     message.success("Product added to cart!");
 
-    // Update cart count in App
     updateCartCount();
   };
 

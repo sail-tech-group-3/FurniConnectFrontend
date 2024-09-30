@@ -9,9 +9,8 @@ const useUsers = () => {
       try {
         const response = await axiosInstance.get("/users");
         setUsers(response.data.data.users);
-        console.log(response.data.data.users);
       } catch (err) {
-        console.error("Error fetching users:", err);
+        console.error("error fetching users", err);
       }
     };
 

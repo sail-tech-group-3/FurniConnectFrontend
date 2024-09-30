@@ -19,7 +19,6 @@ const useCreateUser = () => {
         message.error("Unexpected response status");
       }
     } catch (error) {
-      console.error("Error creating user:", error.response || error.message);
       message.error("Failed to create user");
     } finally {
       setLoading(false);
@@ -29,10 +28,6 @@ const useCreateUser = () => {
   const onUpdateUser = async (userId, values) => {
     setLoading(true);
     try {
-      // Log the userId and values for debugging
-      console.log("Updating user ID:", userId);
-      console.log("Update values:", values);
-
       const response = await axiosInstance.patch(`/admins/${userId}`, values);
       if (response.status === 200) {
         message.success("User updated successfully");

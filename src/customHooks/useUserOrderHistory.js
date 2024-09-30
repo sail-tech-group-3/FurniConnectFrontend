@@ -16,14 +16,10 @@ const useUserOrderHistory = (userId) => {
         const response = await axiosInstance.get(`/orders/${userId}`, {
           params: { page, limit: pageSize },
         });
-        console.log("API response:", response.data);
         setOrders(response.data.data.orders);
         setTotal(response.data.results);
       } catch (error) {
-        console.error(
-          "Fetch orders error:",
-          error.response ? error.response.data : error.message
-        );
+        console.error("");
       } finally {
         setLoading(false);
       }

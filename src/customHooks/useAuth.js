@@ -22,7 +22,7 @@ export const useAuth = () => {
         if (error.response?.status === 401) {
           setIsAuthenticated(false);
         } else {
-          console.error("Error fetching user data:", error);
+          console.error("error fething user data", error);
         }
       }
     };

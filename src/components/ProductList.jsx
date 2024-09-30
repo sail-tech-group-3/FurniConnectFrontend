@@ -8,11 +8,8 @@ function ProductList() {
     try {
       const res = await axiosInstance.get("/products/featured");
       const products = res.data.data.products;
-      console.log(res.data);
       setProducts(products);
-    } catch (error) {
-      console.error(error);
-    }
+    } catch {}
   }
 
   useEffect(() => {

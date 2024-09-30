@@ -34,9 +34,8 @@ const CreatedProducts = () => {
       });
       setProducts(response.data.data.products);
       setTotal(response.data.data.total);
-    } catch (error) {
+    } catch {
       message.error("Failed to fetch products. Please try again.");
-      console.error(error);
     } finally {
       setLoading(false);
     }

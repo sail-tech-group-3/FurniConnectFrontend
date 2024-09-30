@@ -21,13 +21,10 @@ const useRegister = () => {
         setTimeout(() => {
           return navigate("/login");
         }, 2000);
-      } else {
-        console.log("errr");
       }
-    } catch (error) {
+    } catch {
       setLoading(false);
       message.error("Something went wrong");
-      console.log(error);
     }
   };
 

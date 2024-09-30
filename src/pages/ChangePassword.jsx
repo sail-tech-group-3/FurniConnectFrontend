@@ -20,9 +20,8 @@ const ChangePassword = () => {
       console.log(response.data);
 
       navigate("/");
-    } catch (error) {
+    } catch {
       message.error("Failed to change password.");
-      console.error(error);
       setLoading(false);
     }
   };

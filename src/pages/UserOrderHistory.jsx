@@ -17,7 +17,6 @@ const UserOrderHistory = () => {
   const { orders, loading, total, pageSize, fetchOrders } = useUserOrderHistory(
     user?._id
   );
-  // console.log("Order created", JSON.stringify(orders, null, 2));
   useEffect(() => {
     if (user) {
       fetchOrders(currentPage);
@@ -131,7 +130,7 @@ const UserOrderHistory = () => {
     },
     {
       title: "Date",
-      dataIndex: "orderDate", // Ensure this matches the field in the schema
+      dataIndex: "orderDate",
       key: "orderDate",
       render: (date) => (date ? new Date(date).toLocaleDateString() : "N/A"),
     },
@@ -170,7 +169,7 @@ const UserOrderHistory = () => {
             total: total,
             onChange: handlePageChange,
           }}
-          rowKey={(record) => record.key} // Ensure this returns a unique key for each row
+          rowKey={(record) => record.key}
           scroll={{ x: 800 }}
         />
       </div>

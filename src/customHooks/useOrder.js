@@ -16,10 +16,8 @@ const useOrder = () => {
       });
       setOrders(response.data.data.orders);
       setTotal(response.data.results);
-      console.log(response.data);
-    } catch (error) {
+    } catch {
       message.error("Failed to fetch orders. Please try again.");
-      console.error("Fetch orders error:", error);
     } finally {
       setLoading(false);
     }

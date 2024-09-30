@@ -19,9 +19,7 @@ const useLogin = () => {
       message.success("Successfully Logged In");
       if (response.data?.status === "success") {
         const token = response.data?.token;
-        localStorage.setItem("***", token); // Changed to localStorage
-
-        console.log("Stored Token:", localStorage.getItem("***"));
+        localStorage.setItem("***", token);
 
         setTimeout(() => {
           return navigate("/", {
@@ -29,13 +27,11 @@ const useLogin = () => {
           });
         }, 2000);
       } else {
-        console.error("error");
         message.error("Something went wrong");
       }
-    } catch (error) {
+    } catch {
       setLoading(false);
       message.error("Incorrect email or password");
-      console.log(error);
     }
   };
 

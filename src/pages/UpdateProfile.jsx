@@ -35,9 +35,8 @@ const UpdateProfile = () => {
       const { user } = response.data.data;
       setImageUrl(`${user.photo}`);
       message.success("Upload successful!");
-    } catch (error) {
+    } catch {
       message.error("Upload failed.");
-      console.error(error);
     }
   };
 
@@ -45,9 +44,8 @@ const UpdateProfile = () => {
     try {
       await axiosInstance.patch("/users/updateMe", values);
       message.success("Profile updated successfully!");
-    } catch (error) {
+    } catch {
       message.error("Update failed.");
-      console.error("Update error:", error);
     }
   };
 

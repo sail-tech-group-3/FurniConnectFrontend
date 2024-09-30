@@ -14,8 +14,7 @@ const Users = () => {
       await axiosInstance.delete(`/admins/${userId}`);
       setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
       message.success("User deleted successfully");
-    } catch (error) {
-      console.error(error);
+    } catch {
       message.error("Failed to delete user");
     }
   };
